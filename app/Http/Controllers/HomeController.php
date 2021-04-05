@@ -32,8 +32,12 @@ class HomeController extends Controller
         if (Auth::user()->is_admin == 1) {
             return redirect('/subjects');
         } else {
+            $bad_user = false;
+            if (Auth::user()->enabled == 0) {
+                $bad_user = true;
+            }
             $subjects = Subjects::where('status', 'active')->get();
-            return view('home', compact('subjects'));
+            return view('home', compact('subjects','bad_user'));
         }
     }
 

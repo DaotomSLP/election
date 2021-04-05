@@ -64,40 +64,59 @@
                     <!-- /.modal-dialog -->
                 </div>
             @endif
+            @if ($bad_user)
+                <div class="modal fade" id="modal_alert">
+                    <div class="modal-dialog">
+                        <div class="modal-content bg-danger">
+                            <div class="modal-header">
+                                <h4 class="modal-title">ຜູ້ໃຊ້ຖືກປິດໃຊ້ງານ</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
 
-            <div class="row">
-                <div class="col">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">ກະລຸນາເລືອກຫົວຂໍ້ທີ່ຕ້ອງການໂຫວດ :</h3>
+                            </div>
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <!-- form start -->
-                            <form method="POST" action="/selectSubject">
-                                @csrf
-                                @foreach ($subjects as $key => $item)
-                                    <div class="row pb-3">
-                                        <div class="col-md-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="subject"
-                                                    id="{{ $key }}" value="{{ $item->id }}"
-                                                    {{ $key == 0 ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="{{ $key }}">
-                                                    {{ $item->name }}
-                                                </label>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+            @else
+                <div class="row">
+                    <div class="col">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">ກະລຸນາເລືອກຫົວຂໍ້ທີ່ຕ້ອງການໂຫວດ :</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <!-- form start -->
+                                <form method="POST" action="/selectSubject">
+                                    @csrf
+                                    @foreach ($subjects as $key => $item)
+                                        <div class="row pb-3">
+                                            <div class="col-md-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="subject"
+                                                        id="{{ $key }}" value="{{ $item->id }}"
+                                                        {{ $key == 0 ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="{{ $key }}">
+                                                        {{ $item->name }}
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
-                                <button type="submit" class="btn btn-primary px-5">ຕົກລົງ</button>
-                                <div class="clearfix"></div>
-                            </form>
+                                    @endforeach
+                                    <button type="submit" class="btn btn-primary px-5">ຕົກລົງ</button>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
                         </div>
                     </div>
+                    <!-- ./col -->
                 </div>
-                <!-- ./col -->
-            </div>
+            @endif
         @else
             <div class="row">
                 <div class="col">
@@ -157,8 +176,8 @@
         <div class="d-flex justify-content-end">
             <a href="{{ route('logout') }}" class="btn btn-danger"
                 onclick="event.preventDefault();
-                                                                                                document.getElementById('logout-form').submit();" {{ __('Logout') }}><i
-                    class="fa fa-sign-out pull-right"></i>
+                                                                                                                            document.getElementById('logout-form').submit();"
+                {{ __('Logout') }}><i class="fa fa-sign-out pull-right"></i>
                 ອອກຈາກລະບົບ</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
