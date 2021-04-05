@@ -25,7 +25,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h2>{{ $user_count }}</h2>
+                                <h2>{{ $user_count }} ທ່ານ</h2>
                                 <h4>ຈຳນວນ ສສ ທັງໝົດ</h4>
                             </div>
                             {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
@@ -35,7 +35,7 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h2>{{ $all_count }}</h2>
+                                <h2>{{ $all_count }} ທ່ານ</h2>
                                 <h4>ຈຳນວນຜູ້ທີ່ເລືອກແລ້ວ</h4>
                             </div>
                             {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
@@ -48,7 +48,7 @@
                         <!-- small box -->
                         <div class="small-box bg-primary">
                             <div class="inner">
-                                <h2>{{ $yes }}</h2>
+                                <h2>{{ $yes }} ທ່ານ</h2>
                                 <h4>ຈຳນວນຜູ້ເຫັນດີ</h4>
                             </div>
                             {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
@@ -58,7 +58,7 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h2>{{ $no }}</h2>
+                                <h2>{{ $no }} ທ່ານ</h2>
                                 <h4>ຈຳນວນຜູ້ບໍ່ເຫັນດີ</h4>
                             </div>
                             {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
@@ -68,7 +68,7 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h2>{{ $mute }}</h2>
+                                <h2>{{ $mute }} ທ່ານ</h2>
                                 <h4>ຈຳນວນຜູ້ງົດອອກສຽງ</h4>
                             </div>
                             {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
@@ -113,15 +113,19 @@
             // Get context with jQuery - using jQuery's .get() method.
             // var data = <?php echo json_encode($count); ?> ;;
             // console.log(data);
+            var mute = {{ $mute }};
+            var no = {{ $no }};
+            var yes = {{ $yes }};
+            var all_count = {{ $all_count }};
             var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
             var pieData = {
                 labels: [
-                    'ງົດອອກສຽງ',
-                    'ບໍ່ເຫັນດີ',
-                    'ເຫັນດີ',
+                    'ງົດອອກສຽງ (%)',
+                    'ບໍ່ເຫັນດີ (%)',
+                    'ເຫັນດີ (%)',
                 ],
                 datasets: [{
-                    data: [{{ $mute }}, {{ $no }}, {{ $yes }}],
+                    data: [(mute * 100 / all_count).toFixed(2), (no * 100 / all_count).toFixed(2), (yes * 100 / all_count).toFixed(2)],
                     backgroundColor: ['#5cb85c', '#d9534f', '#0275d8'],
                 }]
             };

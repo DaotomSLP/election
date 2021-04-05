@@ -80,7 +80,7 @@ class HomeController extends Controller
 
             $all_count = Election_count::where('subject_id', $id)->count();
 
-            $user_count = User::where('is_admin', '0')->count();
+            $user_count = User::where('is_admin', '0')->where('enabled', '1')->count();
 
             return view('dashboard', compact('count', 'all_count', 'user_count', 'yes', 'no', 'mute'));
         } else {
