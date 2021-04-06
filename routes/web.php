@@ -28,6 +28,8 @@ use App\Models\User;
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+
 Route::post('/selectSubject', [HomeController::class, 'selectSubject'])->middleware('auth')->name('selectSubject');
 
 Route::post('/election', [HomeController::class, 'election'])->middleware('auth')->name('election');
